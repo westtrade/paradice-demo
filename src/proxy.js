@@ -1,6 +1,6 @@
 var httpProxy = require('http-proxy')
 
-httpProxy
+module.exports = httpProxy
 	.createProxyServer({
 		target: 'https://api.paradice.in/',
 		secure: false,
@@ -10,4 +10,3 @@ httpProxy
 	.on('proxyRes', function(proxyRes, req, res) {
 		proxyRes.headers['access-control-allow-origin'] = '*'
 	})
-	.listen(8000)

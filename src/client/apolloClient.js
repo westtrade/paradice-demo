@@ -6,12 +6,15 @@ import { split } from 'apollo-link'
 import { getMainDefinition } from 'apollo-utilities'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 
+const ENDPOINT = location.host
+const IS_SECURE = location.protocol === 'https'
+
 const httpLink = new HttpLink({
-	uri: 'http://localhost:8000/api.php',
+	uri: `http${IS_SECURE ? 's' : ''}://${ENDPOINT}/api/api.php`,
 })
 
 const wsLink = new WebSocketLink({
-	uri: `ws:///localhost:8000/subscriptions`,
+	uri: `ws${IS_SECURE ? 's' : ''}:///${ENDPOINT}/api/subscriptions`,
 	options: {
 		reconnect: true,
 	},
